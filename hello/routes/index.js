@@ -1,6 +1,14 @@
+var mongodb = require('mongodb');
+
+var mongodbServer = new mongodb.Server('localhost', 27017, { auto_reconnect: true, poolSize: 10 });
+var db = new mongodb.Db('hello', mongodbServer);
+
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
+
 var user = require("../models/user").user
 var blog = require("../models/blog").blog
 
@@ -74,29 +82,37 @@ router.get('/edit_blog', function(req, res){
 // Save blog
 router.post('/save_blog', function(req, res){
 	console.log("save_blog");
+	console.log(req.body);
 	var query_doc = {author: "admin", title:req.body.blog_title, content:req.body.blog_body};
 	console.log(query_doc);
-	(function(){
-		blog.insert(query_doc, {safe:true}, function(err, result) {
-			if(!err){
-				console.log(doc);
-				return "success";
-			}
-			else{
-				console.log("failed");
-				return "failed";
-			}
-		});
-		// blog.insert(query_doc, function(err, doc){
-		// 	if(!err){
-		// 		console.log(doc);
-		// 		return "success";
-		// 	}
-		// 	else{
-		// 		return "failed";
-		// 	}
-		// });
-	})(query_doc);
+
+	db.open(function(err, db){
+		console.log("try to open mongodb");
+		if(!err){
+			db.createCollection('blogs', {safa:true}, function(err, collection){
+				if(err){
+					console.log(err);
+				}else{
+					collection.insert(query_doc, {safe:true}, function(err, result){
+						console.log("here_test_tag")
+						console.log(result);
+					});
+					//更新数据
+                   // collection.update({title:'hello'}, {$set:{number:3}}, {safe:true}, function(err, result){
+                   //     console.log(result);
+                   // });
+                   // 删除数据
+                   // collection.remove({title:'hello'},{safe:true},function(err,result){
+                   //      console.log(result);
+                   //  });
+				}
+			});
+		}else{
+			console.log(err);
+		}
+	})
+
+	res.send("success")
 });
 
 

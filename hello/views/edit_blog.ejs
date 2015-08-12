@@ -21,18 +21,35 @@
         });
     </script>
     <script type="text/javascript">
+      var save_blog_xhr;
       function save_blog(){
         var b_html = $("#blog_content").code();
-        console.log(b_html);
+        var b_title = $("#blog_title").val();
+        // console.log(b_html);
+        // var save_blog_fd = new FormData();
+        // save_blog_fd.append("blog_title", b_title);
+        // save_blog_fd.append("blog_body", b_html);
+        // save_blog_xhr = new XMLHttpRequest();
+        // save_blog_xhr.open("POST", '/save_blog');
+        // save_blog_xhr.setRequestHeader("crossOrigin", "anonymous");
+        // save_blog_xhr.onreadystatechange = save_result;
+        // save_blog_xhr.send(save_blog_fd);
          $.ajax({
              type: "POST",
              url: "/save_blog",
-             data: {blog_title:$("#blog_title").val(), blog_body:b_html},
+             data: {blog_title:b_title, blog_body:b_html},
              dataType: "json",
              success: function(data){
+                console.log("nice it is success")
                 alert("Save Success");
              }
          });
+      }
+      function save_result(){
+        if(save_blog_xhr.readyState == 4 && save_blog_xhr.status == 200){
+          var b = save_blog_xhr.responseText;
+          console.log(b);
+        }
       }
     </script>
   </head>
