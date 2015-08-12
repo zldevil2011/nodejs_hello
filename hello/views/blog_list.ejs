@@ -109,7 +109,10 @@
                     <ul>
                         <% for(var i = 0; i < blog.length; i++){ %>
                              <li>
-                                <a href = "blog/<%= blog[i]._id%>"><span style = ""><%= blog[i].blog_title %></span><span style = "float:right;"><%= blog[i].blog_author %></span></a>
+                                <a href = "blog/<%= blog[i]._id%>">
+                                    <span style = ""> <%= blog[i].blog_title %> </span>
+                                    <span style = "float:right;"> <%= blog[i].blog_author %> </span>
+                                </a>
                              </li>
                         <% } %>
                     </ul>
@@ -121,7 +124,9 @@
                             <ul>
                                 <% for(var i = 0; i < blog.length; i++){ %>
                                      <li>
-                                        <a href = "blog/<%= blog[i]._id%>"<span style = ""><%= blog[i].blog_title %></span><span style = "float:right;"><%= blog[i].blog_author %></span>
+                                        <a href = "blog/<%= blog[i]._id%>">
+                                            <span style = ""> <%= blog[i].blog_title %> </span>
+                                            <span style = "float:right;"> <%= blog[i].blog_author %> </span>
                                      </li>
                                 <% } %>
                             </ul>
