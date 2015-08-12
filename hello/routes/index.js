@@ -3,12 +3,9 @@ var mongodb = require('mongodb');
 var mongodbServer = new mongodb.Server('localhost', 27017, { auto_reconnect: true, poolSize: 10 });
 var db = new mongodb.Db('hello', mongodbServer);
 
-
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
-
 var user = require("../models/user").user
 var blog = require("../models/blog").blog
 
@@ -31,12 +28,23 @@ router.get('/login', function(req, res){
 router.get('/logout', function(req, res){
 	res.render('logout', { title : 'logout' })
 });
+router.get('/blog_list', function(req, res){
+	(function(){
+		blog.find({}, function(err, doc){
+			if(!err){
+				res.render("blog_list", {blog:doc, title: "Blog_list"});
+			}else{
+				console.log("failed to get blog list");
+			}	
+		});
+	})({});
+});
 
 router.post('/view_blog', function(req, res){
 	console.log("get info: ");
 	console.log(req.body.blog_author);
 	console.log(req.body.blog_title);
-	var query_doc = {author:req.body.blog_author, title:req.body.blog_title};
+	var query_doc = {author:req.body.blog_author};//, title:req.body.blog_title};
 	// var query_doc = {userid:req.body.blog_title, password:req.body.blog_body};
 	console.log(query_doc);
 	(function(){
