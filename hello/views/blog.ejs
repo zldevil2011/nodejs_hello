@@ -14,14 +14,6 @@
     </style>
   </head>
   <body style = "padding:initial">
-
-<!--     <h1>Hello World</h1>
-    <p>Welcome to <%= title %></p>
-    <% for(var i = 0; i < blog.length; i++){ %>
-        <span>blog_author</span><%= blog[i].author %>
-        <span>blog_body</span><%= blog[i].title %>
-    <% } %>
- -->
     <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -109,63 +101,17 @@
                     <ul>
                         <% for(var i = 0; i < blog.length; i++){ %>
                              <li>
-                                <a href = "blog/<%= blog[i]._id%>"><span style = ""><%= blog[i].blog_title %></span><span style = "float:right;"><%= blog[i].blog_author %></span></a>
+                                <a href = "<%= blog[i].title %>"><span style = ""><%= blog[i].title %></span><span style = "float:right;"><%= blog[i].author %></span></a>
                              </li>
                         <% } %>
                     </ul>
                 </div>
-                <div class="col-md-6 column">
+                <div class="col-md-10 column">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
-                            <p>全部文章</p>
-                            <ul>
-                                <% for(var i = 0; i < blog.length; i++){ %>
-                                     <li>
-                                        <a href = "blog/<%= blog[i]._id%>"<span style = ""><%= blog[i].blog_title %></span><span style = "float:right;"><%= blog[i].blog_author %></span>
-                                     </li>
-                                <% } %>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 column">
-                    <div class="row clearfix">
-                        <div class="col-md-12 column">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item active">评论列表</a>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <div class="list-group-item">
-                                    评论内容1
-                                </div>
-                                <a class="list-group-item active"> 
-                                    <span class="badge">10</span> 
-                                    总数
-                                </a>
-
-                            </div>
+                            <p>文章内容：<%= blog.content %></p>
+                            <p>标题：<%= blog.title %></p>
+                            
                         </div>
                     </div>
                 </div>

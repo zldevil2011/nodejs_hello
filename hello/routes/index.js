@@ -28,10 +28,13 @@ router.get('/login', function(req, res){
 router.get('/logout', function(req, res){
 	res.render('logout', { title : 'logout' })
 });
+
+/* blog_list */
 router.get('/blog_list', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
+				console.log(doc);
 				res.render("blog_list", {blog:doc, title: "Blog_list"});
 			}else{
 				console.log("failed to get blog list");
@@ -40,11 +43,33 @@ router.get('/blog_list', function(req, res){
 	})({});
 });
 
-router.post('/view_blog', function(req, res){
+/* blog */
+router.get('/blog/:id', function(req, res){
+	var blog_id = req.param('id');
+	console.log(blog_id);
+	// res.send("that's ok");
+	var query_doc = {_id:blog_id};
+	(function(){
+		blog.find(query_doc, function(err, doc){
+			if(!err){
+				console.log(doc[0]);
+				res.render("blog", { 
+					blog:  doc[0], 
+					title: doc[0].blog_content
+				});
+			}else{
+				console.log("failed to get the blog");
+			}
+		});
+	})(query_doc);
+});
+
+/* search blog */
+router.post('/search_blog', function(req, res){
 	console.log("get info: ");
 	console.log(req.body.blog_author);
 	console.log(req.body.blog_title);
-	var query_doc = {author:req.body.blog_author};//, title:req.body.blog_title};
+	var query_doc = {blog_author:req.body.blog_author};//, blog_title:req.body.blog_title};
 	// var query_doc = {userid:req.body.blog_title, password:req.body.blog_body};
 	console.log(query_doc);
 	(function(){
@@ -55,7 +80,7 @@ router.post('/view_blog', function(req, res){
 			if(!err){
 				console.log(doc);
     			console.log(doc[0]);
-    			console.log(doc[0].author);
+    			console.log(doc[0].blog_author);
 				console.log("fine, it is here");
 				res.render('blog', {blog: doc, title:"blog_info"});
 			}else{
@@ -91,7 +116,7 @@ router.get('/edit_blog', function(req, res){
 router.post('/save_blog', function(req, res){
 	console.log("save_blog");
 	console.log(req.body);
-	var query_doc = {author: "admin", title:req.body.blog_title, content:req.body.blog_body};
+	var query_doc = {blog_author: "admin", blog_title:req.body.blog_title, blog_content:req.body.blog_body};
 	console.log(query_doc);
 
 	db.open(function(err, db){
