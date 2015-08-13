@@ -14,14 +14,6 @@
     </style>
   </head>
   <body style = "padding:initial">
-
-<!--     <h1>Hello World</h1>
-    <p>Welcome to <%= title %></p>
-    <% for(var i = 0; i < blog.length; i++){ %>
-        <span>blog_author</span><%= blog[i].author %>
-        <span>blog_body</span><%= blog[i].title %>
-    <% } %>
- -->
     <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -98,7 +90,7 @@
                     Welcome to <%= title %>
                 </h1>
                 <p>
-                    Welcome to Blog
+                    Welcome to Join Blog
                 </p>
             </div>
             <div class="row clearfix">
@@ -107,9 +99,9 @@
                         最新列表
                     </p>
                     <ul style = "margin:0px;    padding-left: 4px;">
-                        <% for(var i = 0; i < blog.length; i++){ %>
+                        <% for(var i = 0; i < blogs.length; i++){ %>
                              <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
-                                <a href = "blog/<%= blog[i]._id%>"><%= blog[i].blog_title %></a>
+                                <a href = "blog/<%= blogs[i]._id%>"><%= blogs[i].blog_title %></a>
                              </li>
                         <% } %>
                     </ul>
@@ -120,11 +112,11 @@
                         <div class="col-md-12 column">
                             <p>全部文章</p>
                             <ul style = "margin:0px;    padding-left: 4px;">
-                                <% for(var i = 0; i < blog.length; i++){ %>
+                                <% for(var i = 0; i < blogs.length; i++){ %>
                                      <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
-                                        <a href = "blog/<%= blog[i]._id%>">
-                                            <span style = ""> <%= blog[i].blog_title %> </span>
-                                            <span style = "float:right;"> <%= blog[i].blog_author %> </span>
+                                        <a href = "blog/<%= blogs[i]._id%>">
+                                            <span style = ""> <%= blogs[i].blog_title %> </span>
+                                            <span style = "float:right;"> <%= blogs[i].blog_author %> </span>
                                      </li>
                                 <% } %>
                             </ul>

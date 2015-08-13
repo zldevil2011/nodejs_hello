@@ -110,7 +110,7 @@
                     <ul style = "margin:0px;    padding-left: 4px;">
                         <% for(var i = 0; i < blogs.length; i++){ %>
                              <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
-                                <a href = "<%= blogs[i].blog_title %>"><%= blogs[i].blog_title %></a>
+                                <a href = "<%= blogs[i]._id %>"><%= blogs[i].blog_title %></a>
                              </li>
                         <% } %>
                     </ul>

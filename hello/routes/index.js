@@ -36,8 +36,7 @@ router.get('/blog_list', function(req, res){
 		blog.find({}, function(err, doc){
 			if(!err){
 				console.log(doc);
-				
-				res.render("blog_list", {blog:doc, title: "Blog_list"});
+				res.render("blog_list", {blogs:doc, title: "Our Blog"});
 			}else{
 				console.log("failed to get blog list");
 			}	
@@ -67,12 +66,11 @@ router.get('/blog/:id', function(req, res){
 		});
 	})(query_doc);
 	console.log("1111111111111111111111111111111111111111111");
-	
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
 				console.log(the_blog);
-				res.render("blog",      {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0]});
+				res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0]});
 			}else{
 				res.send("Sorry, The Blog was not found");
 			}
