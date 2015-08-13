@@ -12,6 +12,15 @@
     <style type="text/css">
         a{text-decoration: none;}
     </style>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/summernote.css">
+    <script type="text/javascript" src = "/javascripts/summernote.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+          // $("#blog_summernote").summernote();  
+          // $("#blog_summernote").summernote(<%= blog.blog_content %>);
+        });
+    </script>
   </head>
   <body style = "padding:initial">
     <div class="container">
@@ -33,7 +42,7 @@
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">下拉框<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                     <a href="edit_blog" target = "__blank">写博客</a>
+                                     <a href="/edit_blog" target = "__blank">写博客</a>
                                 </li>
                                 <li>
                                      <a href="#">看精品</a>
@@ -87,31 +96,34 @@
             </nav>
             <div class="jumbotron">
                 <h1>
-                    Welcome to <%= title %>
+                    Learning <%= title %>
                 </h1>
                 <p>
-                    Welcome to Blog
+                    Welcome to Join Blog
                 </p>
             </div>
             <div class="row clearfix">
-                <div class="col-md-2 column">
+                <div class="col-md-3 column">
                     <p>
                         最新列表
                     </p>
-                    <ul>
-                        <% for(var i = 0; i < blog.length; i++){ %>
-                             <li>
-                                <a href = "<%= blog[i].title %>"><span style = ""><%= blog[i].title %></span><span style = "float:right;"><%= blog[i].author %></span></a>
+                    <ul style = "margin:0px;    padding-left: 4px;">
+                        <% for(var i = 0; i < blogs.length; i++){ %>
+                             <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
+                                <a href = "<%= blogs[i].blog_title %>"><%= blogs[i].blog_title %></a>
                              </li>
                         <% } %>
                     </ul>
                 </div>
-                <div class="col-md-10 column">
+                <div class="col-md-9 column">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
-                            <p>文章内容：<%= blog.content %></p>
-                            <p>标题：<%= blog.title %></p>
-                            
+                            <p>标题：<%= blog.blog_title %></p>
+                            <p>文章内容：
+                                <div id = "blog_summernote"> 
+                                    <%- blog.blog_content %>
+                                </div>
+                            </p>
                         </div>
                     </div>
                 </div>

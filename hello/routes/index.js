@@ -8,6 +8,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var user = require("../models/user").user
 var blog = require("../models/blog").blog
+// var blog = require("../models/blog").blog_new
 
 mongoose.connect('mongodb://localhost/hello');
 
@@ -47,21 +48,36 @@ router.get('/blog_list', function(req, res){
 router.get('/blog/:id', function(req, res){
 	var blog_id = req.param('id');
 	console.log(blog_id);
+	var the_blog;
 	// res.send("that's ok");
 	var query_doc = {_id:blog_id};
 	(function(){
 		blog.find(query_doc, function(err, doc){
 			if(!err){
-				console.log(doc[0]);
-				res.render("blog", { 
-					blog:  doc[0], 
-					title: doc[0].blog_content
-				});
+				the_blog = doc;
+				// res.render("blog", { 
+				// 	blogs:doc_all,
+				// 	blog:  doc[0], 
+				// 	title: doc[0].blog_title
+				// });
 			}else{
 				console.log("failed to get the blog");
 			}
 		});
 	})(query_doc);
+	console.log("1111111111111111111111111111111111111111111");
+	
+	(function(){
+		blog.find({}, function(err, doc){
+			if(!err){
+				console.log(the_blog);
+				res.render("blog",      {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0]});
+			}else{
+				res.send("Sorry, The Blog was not found");
+			}
+		});
+	})({});
+
 });
 
 /* search blog */
