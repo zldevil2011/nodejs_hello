@@ -41,10 +41,10 @@
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">下拉框<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                     <a href="edit_blog" target = "__blank">写博客</a>
+                                     <a href="/edit_blog" target = "__blank">写博客</a>
                                 </li>
                                 <li>
-                                     <a href="#">看精品</a>
+                                     <a href="/blog_list">看精品</a>
                                 </li>
                                 <li>
                                      <a href="#">提建议</a>
@@ -106,24 +106,22 @@
                     <p>
                         最新列表
                     </p>
-                    <ul>
+                    <ul style = "margin:0px;    padding-left: 4px;">
                         <% for(var i = 0; i < blog.length; i++){ %>
-                             <li>
-                                <a href = "blog/<%= blog[i]._id%>">
-                                    <span style = ""> <%= blog[i].blog_title %> </span>
-                                    <span style = "float:right;"> <%= blog[i].blog_author %> </span>
-                                </a>
+                             <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
+                                <a href = "blog/<%= blog[i]._id%>"><%= blog[i].blog_title %></a>
                              </li>
                         <% } %>
                     </ul>
+                    <ul >
                 </div>
                 <div class="col-md-6 column">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <p>全部文章</p>
-                            <ul>
+                            <ul style = "margin:0px;    padding-left: 4px;">
                                 <% for(var i = 0; i < blog.length; i++){ %>
-                                     <li>
+                                     <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
                                         <a href = "blog/<%= blog[i]._id%>">
                                             <span style = ""> <%= blog[i].blog_title %> </span>
                                             <span style = "float:right;"> <%= blog[i].blog_author %> </span>

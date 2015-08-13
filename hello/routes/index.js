@@ -36,6 +36,7 @@ router.get('/blog_list', function(req, res){
 		blog.find({}, function(err, doc){
 			if(!err){
 				console.log(doc);
+				
 				res.render("blog_list", {blog:doc, title: "Blog_list"});
 			}else{
 				console.log("failed to get blog list");
