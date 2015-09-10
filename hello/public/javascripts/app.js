@@ -4,6 +4,7 @@ function login(){
     var password = $("#login_password").val();
     console.log(username);
     console.log(password);
+    alert("covert to the new link");
     window.location.href = "/login";
 }
 function register(){
@@ -15,7 +16,7 @@ function register(){
     $.ajax({
         type: "POST",
         url: "/user/register",
-        data: {register_username:username, register_password:password},
+        data: {register_username:username, register_password:password, title:"User_list"},
         dataType: "json",
         success:function(data) {
             alert("注册成功");

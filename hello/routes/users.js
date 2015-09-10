@@ -17,6 +17,10 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/a', function(req, res, next) {
+  res.send('aaaaaaaaaaaa');
+});
+
 router.post('/register', function(req, res){
     console.log("user registering");
     var query_doc = {username:req.body.register_username, password:req.body.register_password};
@@ -40,5 +44,40 @@ router.post('/register', function(req, res){
         }
     });
 });
+
+router.get('/list', function(req, res){
+    var tmp = new Array();
+    console.log("start get the info");
+    (function(){
+		blog.find({}, function(err, doc){
+			if(!err){
+			    //res.send(doc.length);
+                var show = function(value,index,ar){
+                    //console.log(value._id);
+                    tmp.push(value._id);
+                };
+                doc.forEach(show);
+                console.log(tmp);
+                console.log("test if the blogs were selected");
+                (function(){
+                	user.find({}, function(err, doc1){
+                		if(!err){
+                            console.log("before redirect");
+                            //res.send(doc);
+                			res.render("user_list", {users:doc1, blogs:doc});
+                		}else{
+                			res.send("Sorry, The Users was not found");
+                		}
+                	});
+                })({});
+			}else{
+				res.send("Sorry, The Blog was not found");
+			}
+		});
+    })({});
+    console.log("1111111111111111111111dddddd");
+    //res.send(tmp);
+});
+
 
 module.exports = router;

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>user list</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/responsive-nav.css">
+    <script type="text/javascript" src = "/javascripts/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/responsive-nav.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/app.js"></script>
+    <style type="text/css">
+        a{text-decoration: none;}
+        td{
+            padding:5px;
+            text-align: center;
+        }
+    </style>
+    <script>
+
+    </script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/summernote.css">
+    <script type="text/javascript" src = "/javascripts/summernote.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        });
+    </script>
+  </head>
+  <body style = "padding:initial">
+    <div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+
+            <% include head.ejs %>
+
+            <div class="jumbotron">
+                <h1>
+                    Learning user list
+                </h1>
+                <p>
+                    Welcome to Join Blog<%= users.length %>
+                </p>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-3 column">
+                <p>最新列表</p>
+                <ul style = "margin:0px;padding-left: 4px;">
+                    <% for(var i = 0; i < blogs.length; i++){ %>
+                         <li style = "margin: 6px 0;white-space: nowrap;list-style: none;text-overflow: ellipsis;overflow: hidden;">
+                            <a href = "<%= blogs[i]._id %>"><%= blogs[i].blog_title %></a>
+                         </li>
+                    <% } %>
+                </ul>
+                </div>
+                <div class="col-md-9 column">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                        <h3>用户列表</h3>
+                        <table border = 1 class = "userinfo" >
+                            <thead>
+                                <tr>
+                                    <td>ID</td><td>username</td><td>password</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var j = 0; j < users.length; j++){ %>
+                                <tr>
+                                    <td><%= users[j]._id %></td>
+                                    <td><%= users[j].username %></td>
+                                    <td><%= users[j].password %></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style = "text-align:center;">
+                页脚信息展示
+            </h3>
+        </div>
+    </div>
+</div>
+
+<% include window.ejs %>
+
+  </body>
+</html>

@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
 
 /* login */
 router.get('/login', function(req, res){
+    console.log("user click to login the account");
 	res.render('login', { title : 'login'});
 });
 
@@ -36,6 +37,7 @@ router.get('/blog_list', function(req, res){
 		blog.find({}, function(err, doc){
 			if(!err){
 				//console.log(doc);
+                //res.send(doc);
 				res.render("blog_list", {blogs:doc, title: "Our Blog"});
 			}else{
 				console.log("failed to get blog list");
