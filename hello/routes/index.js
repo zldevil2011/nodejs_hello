@@ -6,8 +6,8 @@ var db = new mongodb.Db('hello', mongodbServer);
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var user = require("../models/user").user
-var blog = require("../models/blog").blog
+var user = require("../models/user").user;
+var blog = require("../models/blog").blog;
 // var blog = require("../models/blog").blog_new
 
 mongoose.connect('mongodb://localhost/hello');
@@ -35,7 +35,7 @@ router.get('/blog_list', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
-				console.log(doc);
+				//console.log(doc);
 				res.render("blog_list", {blogs:doc, title: "Our Blog"});
 			}else{
 				console.log("failed to get blog list");
@@ -69,7 +69,7 @@ router.get('/blog/:id', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
-				console.log(the_blog);
+				//console.log(the_blog);
 				res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0]});
 			}else{
 				res.send("Sorry, The Blog was not found");
@@ -130,9 +130,9 @@ router.get('/edit_blog', function(req, res){
 // Save blog
 router.post('/save_blog', function(req, res){
 	console.log("save_blog");
-	console.log(req.body);
+	//console.log(req.body);
 	var query_doc = {blog_author: "admin", blog_title:req.body.blog_title, blog_content:req.body.blog_body};
-	console.log(query_doc);
+	//console.log(query_doc);
 
 	db.open(function(err, db){
 		console.log("try to open mongodb");
@@ -142,8 +142,10 @@ router.post('/save_blog', function(req, res){
 					console.log(err);
 				}else{
 					collection.insert(query_doc, {safe:true}, function(err, result){
-						console.log("here_test_tag")
-						console.log(result);
+						console.log("here_test_tag");
+						//console.log(result);
+                        console.log("we finished");
+	                    res.send({"save_status":"success"});
 					});
 					//更新数据
                    // collection.update({title:'hello'}, {$set:{number:3}}, {safe:true}, function(err, result){
@@ -159,8 +161,6 @@ router.post('/save_blog', function(req, res){
 			console.log(err);
 		}
 	})
-
-	res.send("success")
 });
 
 

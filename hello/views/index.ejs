@@ -28,7 +28,7 @@
 							 <a href="#login" data-toggle="modal">登录</a>
 						</li>
 						<li>
-							 <a href="#">注册</a>
+							 <a href="#register" data-toggle="modal">注册</a>
 						</li>
 						<li class="dropdown">
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
@@ -137,59 +137,7 @@
 	</div>
 </div>
 
-	<!-- 登录窗口 -->
-	<div class="modal fade" id="login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<form action="homepage" method="post">
-				<div class="modal-content">
-					<div class="modal-header">
-						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">
-							登录
-						</h4>
-					</div>
-					<div class="modal-body" style = "text-align: center;;">
-					        <p>
-					            <span>userId:&nbsp;&nbsp;&nbsp;&nbsp;</span><input id="userid" name="userid" type="text">
-					        </p>
-					        <p>
-					            <span>password:</span><input id="password" name="password" type="password">
-					        </p>
-					</div>
-					<div class="modal-footer">
-						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="submit" class="btn btn-primary">登录</button>
-					</div>
-				</div>
-			</form>
-		</div>	
-	</div>
-
-	<!-- 查询窗口 -->
-	<div class="modal fade" id="search" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<form action="view_blog" method="post">
-				<div class="modal-content">
-					<div class="modal-header">
-						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">
-							输入查询的关键字
-						</h4>
-					</div>
-					<div class="modal-body" style = "text-align: center;;">
-					        <p>
-					            <span>blog_author:</span><input id="blog_author" name="blog_author" type="text">
-					        </p>
-					        <p>
-					            <span>blog_title:</span><input id="blog_title" name="blog_title" type="text">
-					        </p>
-					</div>
-					<div class="modal-footer">
-						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="submit" class="btn btn-primary">查询</button>
-					</div>
-				</div>
-			</form>
-		</div>	
-	</div>
+    <% include window.ejs %>
 
   </body>
 </html>

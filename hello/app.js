@@ -7,16 +7,16 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var jade = require('jade')
+var jade = require('jade');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//通过ejs使用html文件
 var ejs=require('ejs');
 // 使用ejs模版引擎
 app.set('view engine', 'ejs');
 
+//通过ejs使用html文件
 //使用html模版引擎
 // app.engine('.html',ejs.__express);
 // app.set('view engine', 'html');
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', users);
 app.use('/test', routes);
 
 

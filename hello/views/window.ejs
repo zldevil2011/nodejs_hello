@@ -1,0 +1,82 @@
+<!-- 登录窗口 -->
+	<div class="modal fade" id="login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="homepage" method="post">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							登录
+						</h4>
+					</div>
+					<div class="modal-body" style = "text-align: center;;">
+					        <p>
+					            <span>username:</span><input id="login_username" name="login_username" type="text">
+					        </p>
+					        <p>
+					            <span>password:</span><input id="login_password" name="login_password" type="password">
+					        </p>
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <button type="submit" class="btn btn-primary" onclick = "login();">登录</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+    <!-- 注册窗口 -->
+	<div class="modal fade" id="register" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="homepage" method="post">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							注册
+						</h4>
+					</div>
+					<div class="modal-body" style = "text-align: center;;">
+					        <p>
+					            <span>username:</span><input id="register_username" name="register_username" type="text">
+					        </p>
+					        <p>
+					            <span>password:</span><input id="register_password" name="register_password" type="password">
+					        </p>
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <button type="submit" class="btn btn-primary" onclick = "register();">注册</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- 查询窗口 -->
+	<div class="modal fade" id="search" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="view_blog" method="post">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							输入查询的关键字
+						</h4>
+					</div>
+					<div class="modal-body" style = "text-align: center;;">
+					        <p>
+					            <span>blog_author:</span><input id="blog_author" name="blog_author" type="text">
+					        </p>
+					        <p>
+					            <span>blog_title:</span><input id="blog_title" name="blog_title" type="text">
+					        </p>
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="submit" class="btn btn-primary">查询</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
