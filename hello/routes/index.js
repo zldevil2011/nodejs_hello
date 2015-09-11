@@ -1,5 +1,4 @@
 var mongodb = require('mongodb');
-
 var mongodbServer = new mongodb.Server('localhost', 27017, { auto_reconnect: true, poolSize: 10 });
 var db = new mongodb.Db('hello', mongodbServer);
 
@@ -8,7 +7,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var user = require("../models/user").user;
 var blog = require("../models/blog").blog;
-// var blog = require("../models/blog").blog_new
 
 mongoose.connect('mongodb://localhost/hello');
 
@@ -23,7 +21,18 @@ router.get('/', function(req, res, next) {
 /* login */
 router.get('/login', function(req, res){
     console.log("user click to login the account");
-	res.render('login', { title : 'login'});
+    if(1){
+        console.log("session");
+        //++req.session.views;
+        req.session.myview = 1;
+        console.log(req.session.myview);
+    }else{
+        console.log("no session");
+        //req.session.views = 1;
+        //console.log(req.session.views);
+    }
+    res.send("login seesion test");
+	//res.render('login', { title : 'login'});
 });
 
 /* logout */
@@ -36,9 +45,11 @@ router.get('/blog_list', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
-				//console.log(doc);
-                //res.send(doc);
-				res.render("blog_list", {blogs:doc, title: "Our Blog"});
+				res.render("blog_list", {
+                    blogs:doc,
+                    login_status: "login",
+                    title: "Our Blog"
+                });
 			}else{
 				console.log("failed to get blog list");
 			}	
@@ -109,7 +120,7 @@ router.post('/search_blog', function(req, res){
 
 /* homepage */
 router.post('/homepage', function(req, res){
-	var query_doc = {userid:req.body.userid, password:req.body.password};
+	var query_doc = {username:req.body.userid, password:req.body.password};
 	console.log(query_doc);
 	(function(){
 		user.count(query_doc, function(err, doc){
