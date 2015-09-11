@@ -21,17 +21,13 @@ router.get('/', function(req, res, next) {
 /* login */
 router.get('/login', function(req, res){
     console.log("user click to login the account");
-    if(1){
-        console.log("session");
-        //++req.session.views;
-        req.session.myview = 1;
-        console.log(req.session.myview);
+    if(req.session.user){
+        res.send("session hava saved" + req.session.user);
     }else{
-        console.log("no session");
-        //req.session.views = 1;
-        //console.log(req.session.views);
+        req.session.user = 1;
+        res.send("initial" + req.session.user);
     }
-    res.send("login seesion test");
+
 	//res.render('login', { title : 'login'});
 });
 
