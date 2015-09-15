@@ -52,7 +52,13 @@ router.post('/login', function(req, res){
     (function(){
         user.find(query_doc, function(err, doc){
             if(!err){
-                console.log(doc);
+                //console.log(doc);
+                if(req.session.user){
+                    console.log("we hava session");
+                }else {
+                    req.session.user = doc[0];
+                    console.log(req.session.user);
+                }
                 console.log(doc.length);
                 if(doc.length == 1) {
                     console.log("user login success");
