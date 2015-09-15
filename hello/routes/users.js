@@ -45,6 +45,31 @@ router.post('/register', function(req, res){
     });
 });
 
+router.post('/login', function(req, res){
+    console.log("user logining");
+    var query_doc = {username:req.body.username, password:req.body.password};
+    console.log(query_doc);
+    (function(){
+        user.find(query_doc, function(err, doc){
+            if(!err){
+                console.log(doc);
+                console.log(doc.length);
+                if(doc.length == 1) {
+                    console.log("user login success");
+                    res.send({"login_result": "success"});
+                }else{
+                    console.log("user login failed");
+                    res.send(err);
+                }
+            }else{
+                console.log("database error");
+               res.send({"login_result":"error"});
+            }
+        });
+    })(query_doc);
+});
+
+
 router.get('/list', function(req, res){
     var tmp = new Array();
     console.log("start get the info");
@@ -64,7 +89,7 @@ router.get('/list', function(req, res){
                 		if(!err){
                             console.log("before redirect");
                             //res.send(doc);
-                			res.render("user_list", {users:doc1, blogs:doc});
+                			res.render("user_list", {users:doc1, blogs:doc, login_status:"logout"});
                 		}else{
                 			res.send("Sorry, The Users was not found");
                 		}

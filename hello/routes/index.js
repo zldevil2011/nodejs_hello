@@ -43,7 +43,7 @@ router.get('/blog_list', function(req, res){
 			if(!err){
 				res.render("blog_list", {
                     blogs:doc,
-                    login_status: "login",
+                    login_status:"logout",
                     title: "Our Blog"
                 });
 			}else{
@@ -79,7 +79,7 @@ router.get('/blog/:id', function(req, res){
 		blog.find({}, function(err, doc){
 			if(!err){
 				//console.log(the_blog);
-				res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0]});
+				res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0], login_status:"logout"});
 			}else{
 				res.send("Sorry, The Blog was not found");
 			}

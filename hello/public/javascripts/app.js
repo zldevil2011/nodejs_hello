@@ -1,11 +1,24 @@
 function login(){
-    alert("click to login");
+    //alert("click to login");
     var username = $("#login_username").val();
     var password = $("#login_password").val();
     console.log(username);
     console.log(password);
-    alert("covert to the new link");
-    window.location.href = "/login";
+    //alert("covert to the new link");
+    $.ajax({
+        type: "POST",
+        "url": "/user/login",
+        data:{username:username, password:password},
+        dataType:"json",
+        success:function(){
+            alert("登陆成功");
+        },
+        error:function(){
+            //alert(arguments[1]);
+            alert("登陆失败，请检查用户名和密码");
+        }
+    });
+    //window.location.href = "/user/login";
 }
 function register(){
     alert("click to register");
