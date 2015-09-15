@@ -1,4 +1,4 @@
-
+var log4js = require('log4js');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
