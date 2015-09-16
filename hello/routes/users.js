@@ -1,4 +1,4 @@
-var logger = require('../app.js').logger;
+var logger = require('./../app.js').logger;
 var mongodb = require('mongodb');
 
 var mongodbServer = new mongodb.Server('localhost', 27017, { auto_reconnect: true, poolSize: 10 });
@@ -90,14 +90,19 @@ router.get('/list', function(req, res){
                     tmp.push(value._id);
                 };
                 doc.forEach(show);
-                console.log(tmp);
+                //console.log(tmp);
                 console.log("test if the blogs were selected");
                 (function(){
                 	user.find({}, function(err, doc1){
                 		if(!err){
                             console.log("before redirect");
+                            if(req.session.user){
+                                console.log("we hava session");
+                                res.render("user_list", {users:doc1, blogs:doc, login_status:"login", user: req.session.user});
+                            }else {
+                                res.render("user_list", {users:doc1, blogs:doc, login_status:"logout"});
+                            }
                             //res.send(doc);
-                			res.render("user_list", {users:doc1, blogs:doc, login_status:"logout"});
                 		}else{
                 			res.send("Sorry, The Users was not found");
                 		}

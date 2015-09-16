@@ -1,5 +1,6 @@
 function login(){
     //alert("click to login");
+    var current_url = window.location;
     var username = $("#login_username").val();
     var password = $("#login_password").val();
     console.log(username);
@@ -12,6 +13,7 @@ function login(){
         dataType:"json",
         success:function(){
             alert("登陆成功");
+            window.location.href = current_url;
         },
         error:function(){
             //alert(arguments[1]);

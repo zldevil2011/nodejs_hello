@@ -41,11 +41,12 @@ router.get('/blog_list', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
-				res.render("blog_list", {
-                    blogs:doc,
-                    login_status:"logout",
-                    title: "Our Blog"
-                });
+                if(req.session.user){
+                    console.log("we hava session");
+                    res.render("blog_list", {blogs:doc, login_status:"login", title: "Our Blog",user: req.session.user});
+                }else {
+                    res.render("blog_list", {blogs:doc, login_status:"logout", title: "Our Blog",user: req.session.user});
+                }
 			}else{
 				console.log("failed to get blog list");
 			}	
@@ -78,8 +79,13 @@ router.get('/blog/:id', function(req, res){
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
+                if(req.session.user){
+                    console.log("we hava session");
+                    res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0], login_status:"login",user: req.session.user});
+                }else {
+                    res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0], login_status:"logout"});
+                }
 				//console.log(the_blog);
-				res.render("blog", {blogs:doc, title: the_blog[0].blog_title, blog: the_blog[0], login_status:"logout"});
 			}else{
 				res.send("Sorry, The Blog was not found");
 			}
@@ -93,12 +99,10 @@ router.post('/search_blog', function(req, res){
 	console.log("get info: ");
 	console.log(req.body.blog_author);
 	console.log(req.body.blog_title);
-	var query_doc = {blog_author:req.body.blog_author};//, blog_title:req.body.blog_title};
-	// var query_doc = {userid:req.body.blog_title, password:req.body.blog_body};
+	var query_doc = {blog_author:req.body.blog_author};
 	console.log(query_doc);
 	(function(){
 		console.log(query_doc);
-		// console.log(blog.find());
 		blog.find(query_doc, function(err, doc){
 			console.log(query_doc);
 			if(!err){
@@ -106,7 +110,12 @@ router.post('/search_blog', function(req, res){
     			console.log(doc[0]);
     			console.log(doc[0].blog_author);
 				console.log("fine, it is here");
-				res.render('blog', {blog: doc, title:"blog_info"});
+                if(req.session.user){
+                    console.log("we hava session");
+                    res.render('blog', {blog: doc, title:"blog_info", login_status:"login",user: req.session.user});
+                }else {
+                    res.render('blog', {blog: doc, title:"blog_info", login_status:"logout"});
+                }
 			}else{
 				console.log("failed to count");
 			}
@@ -134,14 +143,17 @@ router.post('/homepage', function(req, res){
 
 // edit_blog
 router.get('/edit_blog', function(req, res){
-	res.render('edit_blog', { title : '创建新的博客' })
+    if(req.session.user){
+        console.log("we hava session");
+        res.render('edit_blog', { title : '创建新的博客', login_status:"login",user: req.session.user});
+    }else {
+        res.render('edit_blog', { title : '创建新的博客' , login_status:"logout"});
+    }
 });
 // Save blog
 router.post('/save_blog', function(req, res){
 	console.log("save_blog");
-	//console.log(req.body);
 	var query_doc = {blog_author: "admin", blog_title:req.body.blog_title, blog_content:req.body.blog_body};
-	//console.log(query_doc);
 
 	db.open(function(err, db){
 		console.log("try to open mongodb");

@@ -64,3 +64,5 @@ db.sqlite3
 
 # nodejs
 # .idea/workspace.xml
+
+./logs
