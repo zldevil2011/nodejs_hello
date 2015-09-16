@@ -26,24 +26,15 @@
       function save_blog(){
         var b_html = $("#blog_content").code();
         var b_title = $("#blog_title").val();
-        // console.log(b_html);
-        // var save_blog_fd = new FormData();
-        // save_blog_fd.append("blog_title", b_title);
-        // save_blog_fd.append("blog_body", b_html);
-        // save_blog_xhr = new XMLHttpRequest();
-        // save_blog_xhr.open("POST", '/save_blog');
-        // save_blog_xhr.setRequestHeader("crossOrigin", "anonymous");
-        // save_blog_xhr.onreadystatechange = save_result;
-        // save_blog_xhr.send(save_blog_fd);
-        alert("准备提交数据");
+        //alert("准备提交数据");
          $.ajax({
              type: "POST",
              url: "/save_blog",
              data: {blog_title:b_title, blog_body:b_html},
              dataType: "json",
              success:function(data) {
-                alert("保存成功");
-                return;
+                alert("发表成功");
+                window.location.href = "/blog_list";
              },
              error:function(){
                 alert(arguments[1]);
@@ -152,7 +143,7 @@
                       </tbody>
                     </table>
 
-                    <button type="button" onclick="save_blog();" style="width: 10%;align-content: center;margin-left: 45%;">保存更新</button>
+                    <button type="button" onclick="save_blog();" style="width: 10%;align-content: center;margin-left: 45%;">发表文章</button>
                   
                   </div>
                 </div>
