@@ -1,3 +1,4 @@
+var logger = require('../app.js').logger;
 var mongodb = require('mongodb');
 
 var mongodbServer = new mongodb.Server('localhost', 27017, { auto_reconnect: true, poolSize: 10 });
@@ -46,6 +47,7 @@ router.post('/register', function(req, res){
 });
 
 router.post('/login', function(req, res){
+    //logger.info("This is an index page! -- log4js");
     console.log("user logining");
     var query_doc = {username:req.body.username, password:req.body.password};
     console.log(query_doc);

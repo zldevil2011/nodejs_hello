@@ -1,7 +1,7 @@
 var log4js = require('log4js');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+//var logger = require('morgan');
 
 //var session = require('session');
 var bodyParser = require('body-parser');
@@ -15,6 +15,24 @@ var app = express();
 var RedisStore = require('connect-redis');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+
+//配置日志系统
+log4js.configure({
+    appenders: [
+        {type:'console'}, {
+            type:'file',
+            filename:'logs/access.log',
+            maxLogSize:1024,
+            backups:4,
+            category:'normal'
+        }
+    ],
+    replaceConsole:true
+});
+
+//var logger = log4js.getLogger('normal');
+//logger.setLevel('INFO');
+
 
 // 使用ejs模版引擎
 var ejs=require('ejs');
@@ -30,7 +48,7 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -44,9 +62,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
+exports.logger = function(name){
+    var logger = log4js.getLogger(name);
+    logger.setLevel('INFO');
+    return logger;
+};
+
+//应用Log系统
+app.use(log4js.connectLogger(this.logger('normal'), {level:'auto'}));//, format:':method :url'
+
 app.use('/', routes);
 app.use('/user', users);
 app.use('/test', routes);
+app.use('/test111',function(req, res){
+   console.log("test if the console was loged");
+    //this.logger.info("This is an index page! -- log4js");
+    res.send('Just for test');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -83,3 +115,5 @@ app.use(function(req, res, next) {
 module.exports = app;
 
 app.listen(3005);
+exports.logger = this.logger();
+
