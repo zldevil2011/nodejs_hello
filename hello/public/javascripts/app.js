@@ -43,12 +43,16 @@ function register(){
 };
 function search_blog(){
     var key = $("#search_key").val();
-    alert("prepare to redirect");
-    $.get(
-        '/blog_list',
-        'abc',
-        function(data){
-            alert("get ok");
+    $.ajax({
+        type:"POST",
+        url:"/query_blog",
+        data:{key:key},
+        dataType:"json",
+        success:function(data){
+            alert("find it");
+        },
+        error:function(){
+            alert("failed to get it");
         }
-    );
+    });
 }
