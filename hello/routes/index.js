@@ -94,53 +94,6 @@ router.get('/blog/:id', function(req, res){
 
 });
 
-/* search blog */
-router.post('/search_blog', function(req, res){
-	console.log("get info: ");
-	console.log(req.body.blog_author);
-	console.log(req.body.blog_title);
-	var query_doc = {blog_author:req.body.blog_author};
-	console.log(query_doc);
-	(function(){
-		console.log(query_doc);
-		blog.find(query_doc, function(err, doc){
-			console.log(query_doc);
-			if(!err){
-				console.log(doc);
-    			console.log(doc[0]);
-    			console.log(doc[0].blog_author);
-				console.log("fine, it is here");
-                if(req.session.user){
-                    console.log("we hava session");
-                    res.render('blog', {blog: doc, title:"blog_info", login_status:"login",user: req.session.user});
-                }else {
-                    res.render('blog', {blog: doc, title:"blog_info", login_status:"logout"});
-                }
-			}else{
-				console.log("failed to count");
-			}
-		});
-	})(query_doc);
-});
-
-/* homepage */
-router.post('/homepage', function(req, res){
-	var query_doc = {username:req.body.userid, password:req.body.password};
-	console.log(query_doc);
-	(function(){
-		user.count(query_doc, function(err, doc){
-			console.log(doc);
-			if(doc == 1){
-				console.log(query_doc.userid + ":login success in " + new Date());
-				res.render('homepage', { title : 'homepage'});
-			}else{
-				console.log(query_doc.userid + ": login failed in " + new Date());
-                res.redirect('/');
-			}
-		});
-	})(query_doc);
-});
-
 // edit_blog
 router.get('/edit_blog', function(req, res){
     if(req.session.user){
@@ -189,6 +142,77 @@ router.post('/save_blog', function(req, res){
 	})
 });
 
+//query_blog by key
+
+router.get('/query_blog', function(req, res){
+    console.log("query blog by key word");
+     //query['name']=new RegExp(req.query.m2);
+    var query_doc = {blog_title: new RegExp(req.body.key)};
+    console.log(query_doc);
+    (function(){
+        blog.find(query_doc, function(err, doc){
+            if(!err){
+                console.log(doc);
+                if(req.session.user){
+                    console.log("we hava session");
+                    res.redirect("/blog_list");
+                    res.render("blog_list", {blogs:doc, login_status:"login", title: "Our Blog",user: req.session.user});
+                }else {
+                    res.render("blog_list", {blogs:doc, login_status:"logout", title: "Our Blog",user: req.session.user});
+                }
+            }else{
+                res.send({"query_result":"error"});
+            }
+        });
+    })(query_doc);
+});
+
+/* search blog precise */
+router.post('/search_blog_d', function(req, res){
+	console.log("get info: ");
+	console.log(req.body.blog_author);
+	console.log(req.body.blog_title);
+	var query_doc = {blog_author:req.body.blog_author};
+	console.log(query_doc);
+	(function(){
+		console.log(query_doc);
+		blog.find(query_doc, function(err, doc){
+			console.log(query_doc);
+			if(!err){
+				console.log(doc);
+    			console.log(doc[0]);
+    			console.log(doc[0].blog_author);
+				console.log("fine, it is here");
+                if(req.session.user){
+                    console.log("we hava session");
+                    res.render('blog', {blog: doc, title:"blog_info", login_status:"login",user: req.session.user});
+                }else {
+                    res.render('blog', {blog: doc, title:"blog_info", login_status:"logout"});
+                }
+			}else{
+				console.log("failed to count");
+			}
+		});
+	})(query_doc);
+});
+
+/* homepage */
+router.post('/homepage', function(req, res){
+	var query_doc = {username:req.body.userid, password:req.body.password};
+	console.log(query_doc);
+	(function(){
+		user.count(query_doc, function(err, doc){
+			console.log(doc);
+			if(doc == 1){
+				console.log(query_doc.userid + ":login success in " + new Date());
+				res.render('homepage', { title : 'homepage'});
+			}else{
+				console.log(query_doc.userid + ": login failed in " + new Date());
+                res.redirect('/');
+			}
+		});
+	})(query_doc);
+});
 
 router.get('/test', function(req, res){
 	res.send('test welcome');

@@ -40,4 +40,15 @@ function register(){
             alert(arguments[1]);
         }
     });
+};
+function search_blog(){
+    var key = $("#search_key").val();
+    alert("prepare to redirect");
+    $.get(
+        '/blog_list',
+        'abc',
+        function(data){
+            alert("get ok");
+        }
+    );
 }
