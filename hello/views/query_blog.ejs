@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>query_blog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/responsive-nav.css">
+    <script type="text/javascript" src = "/javascripts/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/responsive-nav.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/app.js"></script>
+    <style type="text/css">
+        a{text-decoration: none;}
+        td{
+            padding:5px;
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body style = "padding:initial">
+    <div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <% include head.ejs %>
+            <div class="jumbotron">
+                <h1>
+                    Learning user list
+                </h1>
+                <p>
+                    Welcome to Join Blog
+                </p>
+            </div>
+            <div class="row clearfix">
+                <div class = "col-md-12 column">
+                    <ul>
+                        <% for(var i = 0; i < blogs.length; ++i){%>
+                            <li>
+                                <%= blogs[i].blog_title %>
+                            </li>
+                        <% }%>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style = "text-align:center;">
+                页脚信息展示
+            </h3>
+        </div>
+    </div>
+</div>
+
+<% include window.ejs %>
+
+  </body>
+</html>

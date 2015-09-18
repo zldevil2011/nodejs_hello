@@ -41,18 +41,19 @@ function register(){
         }
     });
 };
-function search_blog(){
-    var key = $("#search_key").val();
-    $.ajax({
-        type:"POST",
-        url:"/query_blog",
-        data:{key:key},
-        dataType:"json",
-        success:function(data){
-            alert("find it");
-        },
-        error:function(){
-            alert("failed to get it");
-        }
-    });
+function blog_query(){
+    var query_key = $("#search_key").val();
+    window.location.href = "/query_blog?blog_key=" + query_key;
+    //$.ajax({
+    //    type:"POST",
+    //    url:"/query_blog",
+    //    data:{blog_key:query_key},
+    //    dataType:"json",
+    //    success:function(data){
+    //        alert("find it");
+    //    },
+    //    error:function(){
+    //        alert(arguments[1]);
+    //    }
+    //});
 }

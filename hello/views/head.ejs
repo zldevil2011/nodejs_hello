@@ -26,9 +26,6 @@
                            <a href="/edit_blog">写博客</a>
                       </li>
                       <li>
-                           <a href="#"><%= login_status %></a>
-                      </li>
-                      <li>
                            <a href="/blog_list">看精品</a>
                       </li>
                       <li>
@@ -50,7 +47,7 @@
           <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                   <input id = "search_key" type="text" class="form-control" />
-              </div> <button type="submit" class="btn btn-default" onclick = 'search_blog();'>搜博客</button>
+              </div> <button type="submit" class="btn btn-default" onclick = 'blog_query();'>搜博客</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
               <li>

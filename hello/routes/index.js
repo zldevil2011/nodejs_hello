@@ -57,25 +57,17 @@ router.get('/blog_list', function(req, res){
 /* blog */
 router.get('/blog/:id', function(req, res){
 	var blog_id = req.param('id');
-	console.log(blog_id);
 	var the_blog;
-	// res.send("that's ok");
 	var query_doc = {_id:blog_id};
 	(function(){
 		blog.find(query_doc, function(err, doc){
 			if(!err){
 				the_blog = doc;
-				// res.render("blog", { 
-				// 	blogs:doc_all,
-				// 	blog:  doc[0], 
-				// 	title: doc[0].blog_title
-				// });
 			}else{
 				console.log("failed to get the blog");
 			}
 		});
 	})(query_doc);
-	console.log("1111111111111111111111111111111111111111111");
 	(function(){
 		blog.find({}, function(err, doc){
 			if(!err){
@@ -142,29 +134,52 @@ router.post('/save_blog', function(req, res){
 	})
 });
 
-//query_blog by key
-
+//query_blog redirect to query_page
 router.get('/query_blog', function(req, res){
-    console.log("query blog by key word");
-     //query['name']=new RegExp(req.query.m2);
-    var query_doc = {blog_title: new RegExp(req.body.key)};
+
+    var query_doc = {blog_title: new RegExp(req.query.blog_key)};
     console.log(query_doc);
+    var login_result = "logout", user = null;
+    if(req.session.user){
+        login_result = "login";
+        user = req.session.user;
+    }
+
+    (function(){
+        blog.find(query_doc, function(err, doc){
+            if(!err){
+                //console.log(doc);
+                res.render('query_blog', {blogs:doc, login_status:login_result ,user: user});
+            }else{
+                res.send("query failed");
+            }
+        });
+    })(query_doc);
+});
+
+//query_blog by key
+router.post('/query_blog', function(req, res){
+    console.log("query blog by key word");
+    var query_doc = {blog_title: new RegExp(req.body.key)};
     (function(){
         blog.find(query_doc, function(err, doc){
             if(!err){
                 console.log(doc);
+                //res.send({"query_result":"success"});
                 if(req.session.user){
                     console.log("we hava session");
-                    res.redirect("/blog_list");
+                    //res.redirect("/blog_list");
                     res.render("blog_list", {blogs:doc, login_status:"login", title: "Our Blog",user: req.session.user});
                 }else {
                     res.render("blog_list", {blogs:doc, login_status:"logout", title: "Our Blog",user: req.session.user});
                 }
             }else{
+                console.log("failed to query");
                 res.send({"query_result":"error"});
             }
         });
     })(query_doc);
+
 });
 
 /* search blog precise */
