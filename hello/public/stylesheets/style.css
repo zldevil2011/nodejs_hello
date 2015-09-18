@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+a:active{text-decoration:none;}
+.blog_list_li{
+    list-style-type:none;
+    height:30px;
+    width:100%;
+    overflow: hidden;
+    background-color: gainsboro;
+    margin-bottom: 10px;
+    font-size: 1.285em;
+    font-family: microsoft yahei;
+}
+.blog_list_li .li_div{
+    margin-top:10px;
+}
+.content_list_height{
+    min-height:800px;
+}
