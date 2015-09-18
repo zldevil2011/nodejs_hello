@@ -49,7 +49,8 @@
                                     <a href = "blog/<%= blogs[i]._id%>"><%= blogs[i].blog_title %></a>
                                 </div>
                                 <div class = "col-md-12 column li_div">
-                                    作者&nbsp;<a href="user/<%= blogs[i].blog_author%>"><%= blogs[i].blog_author %></a> 日期&nbsp;2015-09-18
+                                    作者&nbsp;<a href="user/<%= blogs[i].blog_author%>"><%= blogs[i].blog_author %></a>
+                                    日期&nbsp;<%= blogs[i].blog_time%>
                                 </div>
                                 <div class = "col-md-12 column li_div">
                                     <%- blogs[i].blog_content %>

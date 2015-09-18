@@ -103,7 +103,7 @@ router.post('/save_blog', function(req, res){
         console.log("we hava session");
         author = req.session.user.username;
     }
-	var query_doc = {blog_author: author, blog_title:req.body.blog_title, blog_content:req.body.blog_body};
+	var query_doc = {blog_author: author, blog_title:req.body.blog_title, blog_content:req.body.blog_body, blog_time:new Date()};
 
 	db.open(function(err, db){
 		console.log("try to open mongodb");
