@@ -10,10 +10,20 @@
     <script type="text/javascript" src = "/javascripts/responsive-nav.min.js"></script>
     <script type="text/javascript" src = "/javascripts/app.js"></script>
     <style type="text/css">
-        a{text-decoration: none;}
-        td{
-            padding:5px;
-            text-align: center;
+        a:link{text-decoration:none;}
+        a:visited{text-decoration:none;}
+        a:hover{text-decoration:none;}
+        a:active{text-decoration:none;}
+        .blog_li{
+            list-style-type:none;
+            height:100px;
+            width:100%;
+            overflow: hidden;
+            background-color: gainsboro;
+            margin-bottom: 10px;
+        }
+        .li_div{
+            margin-top:10px;
         }
     </style>
   </head>
@@ -34,8 +44,16 @@
                 <div class = "col-md-12 column">
                     <ul>
                         <% for(var i = 0; i < blogs.length; ++i){%>
-                            <li>
-                                <%= blogs[i].blog_title %>
+                            <li class = "blog_li">
+                                <div class = "col-md-12 column li_div">
+                                    <a href = "blog/<%= blogs[i]._id%>"><%= blogs[i].blog_title %></a>
+                                </div>
+                                <div class = "col-md-12 column li_div">
+                                    作者&nbsp;<a href="user/<%= blogs[i].blog_author%>"><%= blogs[i].blog_author %></a> 日期&nbsp;2015-09-18
+                                </div>
+                                <div class = "col-md-12 column li_div">
+                                    <%- blogs[i].blog_content %>
+                                </div>
                             </li>
                         <% }%>
                     </ul>
