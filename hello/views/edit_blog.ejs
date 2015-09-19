@@ -13,7 +13,6 @@
     <script type="text/javascript" src = "/javascripts/summernote.min.js"></script>
     <script type="text/javascript" src = "/javascripts/app.js"></script>
     <style type="text/css">
-        a{text-decoration: none;}
         .note-editor {min-height: 500px;}
     </style>
     <script type="text/javascript">
@@ -53,10 +52,8 @@
       <div class="container">
         <div class="row clearfix">
           <div class="col-md-12 column">
-
-          <% include head.ejs %>
-
-          <div class="row clearfix">
+            <% include head.ejs %>
+            <div class="row clearfix">
               <div class="col-md-12 column">
                 <div class="row clearfix">
                   <div class="col-md-12 column">
@@ -149,6 +146,9 @@
                 </div>
               </div>
             </div>
+
+            <% include foot.ejs %>
+
           </div>
         </div>
       </div>

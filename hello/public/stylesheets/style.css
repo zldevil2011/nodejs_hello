@@ -26,3 +26,18 @@ a:active{text-decoration:none;}
 .content_list_height{
     min-height:800px;
 }
+.blog_li{
+    list-style-type:none;
+    height:100px;
+    width:100%;
+    overflow: hidden;
+    background-color: gainsboro;
+    margin-bottom: 10px;
+}
+.li_div{
+    margin-top:10px;
+}
+td{
+    padding:5px;
+    text-align: center;
+}
