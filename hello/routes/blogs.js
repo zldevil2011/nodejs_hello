@@ -10,11 +10,34 @@ var blog = require("../models/blog").blog;
 
 mongoose.connect('mongodb://localhost/hello');
 
+/* manage blog */
+router.get('/manage/blogs', function(req, res){
+    var login_status = "logout";
+    if(req.session.user){
+        login_status = "login";
+    }else{
+        res.send("please login firstly");
+        return;
+    }
+    var query_doc = {blog_author:req.session.user.username};
+    (function(){
+        blog.find(query_doc, function(err, doc){
+            if(!err){
+                console.log(doc);
+                res.render("manage_blog",{blogs:doc, login_status:login_status, title: "Our Blog",user: req.session.user});
+            }else{
+                res.send("query failed!");
+            }
+        });
+    })(query_doc);
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	if(req.url!=="/favicon.ico"){
 		console.log(req.url);
 		res.render('index', { title: 'Express__test—HTML' });
+
 	}
 });
 

@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 
 //var session = require('session');
 var bodyParser = require('body-parser');
-var routes = require('./routes/index');
+var routes = require('./routes/blogs');
 var users = require('./routes/users');
 var jade = require('jade');
 var express = require('express');

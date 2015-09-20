@@ -15,43 +15,41 @@
   </head>
   <body style = "padding:initial">
     <div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <% include head.ejs %>
-            <div class="jumbotron">
-                <h1>
-                    Just for blog
-                </h1>
-                <p>
-                    Do Only For It
-                </p>
-            </div>
-            <div class="row clearfix">
-                <div class = "col-md-12 column">
-                    <ul>
-                        <% for(var i = 0; i < blogs.length; ++i){%>
-                            <li class = "blog_li">
-                                <div class = "col-md-12 column li_div">
-                                    <a href = "blog/<%= blogs[i]._id%>"><%= blogs[i].blog_title %></a>
-                                </div>
-                                <div class = "col-md-12 column li_div">
-                                    作者&nbsp;<a href="user/<%= blogs[i].blog_author%>"><%= blogs[i].blog_author %></a>
-                                    日期&nbsp;<%= blogs[i].blog_time%>
-                                </div>
-                                <div class = "col-md-12 column li_div">
-                                    <%- blogs[i].blog_content %>
-                                </div>
-                            </li>
-                        <% }%>
-                    </ul>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <% include head.ejs %>
+                <div class="jumbotron">
+                    <h1>
+                        Just for blog
+                    </h1>
+                    <p>
+                        Do Only For It
+                    </p>
                 </div>
+                <div class="row clearfix">
+                    <div class = "col-md-12 column">
+                        <ul>
+                            <% for(var i = 0; i < blogs.length; ++i){%>
+                                <li class = "blog_li">
+                                    <div class = "col-md-12 column li_div">
+                                        <a href = "blog/<%= blogs[i]._id%>"><%= blogs[i].blog_title %></a>
+                                    </div>
+                                    <div class = "col-md-12 column li_div">
+                                        作者&nbsp;<a href="user/<%= blogs[i].blog_author%>"><%= blogs[i].blog_author %></a>
+                                        日期&nbsp;<%= blogs[i].blog_time%>
+                                    </div>
+                                    <div class = "col-md-12 column li_div">
+                                        <%- blogs[i].blog_content %>
+                                    </div>
+                                </li>
+                            <% }%>
+                        </ul>
+                    </div>
+                </div>
+                <% include foot.ejs %>
             </div>
-
-            <% include foot.ejs %>
-
         </div>
     </div>
-</div>
 
 <% include window.ejs %>
 
