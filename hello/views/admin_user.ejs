@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>admin users</title>
+
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/responsive-nav.css">
+
+        <script type="text/javascript" src = "/javascripts/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src = "/javascripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src = "/javascripts/responsive-nav.min.js"></script>
+        <script type="text/javascript" src = "/javascripts/app.js"></script>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <style>
+            ul li div{
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+
+    </head>
+    <body style = "padding:initial">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <% include head.ejs %>
+                    <div class="jumbotron">
+                        <h1>
+                            Just for blog
+                        </h1>
+                        <p>
+                            Do Only For It
+                        </p>
+                    </div>
+                    <div class="row clearfix">
+                        <div class = "col-md-12 column" style = "border: 1px solid #DEC0C0;">
+                            <ul style = "list-style:none;">
+                                <% for(var i = 0; i < users.length; ++i){%>
+                                    <li class = "" style = "line-height:50px">
+                                        <div class = "col-md-2 column li_div">
+                                            <%= i %>
+                                        </div>
+                                        <div class = "col-md-2 column li_div ">
+                                            <a href="user/<%= users[i].username%>"><%= users[i].username %></a>
+                                        </div>
+                                        <div class = "col-md-2 column li_div">
+                                            <%= users[i].password %>
+                                        </div>
+                                        <div class = "col-md-2 column li_div">
+                                            <a href = "#">重置密码</a>
+                                        </div>
+                                        <div class = "col-md-2 column li_div">
+                                            <a href = "#">封锁用户</a>
+                                        </div>
+                                        <div class = "col-md-2 column li_div">
+                                            <a href = "#">删除用户</a>
+                                        </div>
+                                    </li>
+                                <% }%>
+                            </ul>
+                        </div>
+                    </div>
+                    <% include foot.ejs %>
+                </div>
+
+            </div>
+
+        </div>
+
+        <% include window.ejs %>
+
+    </body>
+</html>

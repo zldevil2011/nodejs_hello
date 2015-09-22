@@ -9,13 +9,14 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var user = require("../models/user").user;
 var blog = require("../models/blog").blog;
+var admin = require("../models/admin").admin;
 // var blog = require("../models/blog").blog_new
 
 //mongoose.connect('mongodb://localhost/hello');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('admin page');
 });
 
 router.post('/register', function(req, res){
@@ -114,20 +115,21 @@ router.get('/list', function(req, res){
 });
 
 /* manage user */
-router.get('/manage/users', function(req, res){
+router.get('/users', function(req, res){
     var login_status = "logout";
-    if(req.session.user){
-        login_status = "login";
-    }else{
-        res.send("please login firstly");
-        return;
-    }
+    //if(req.session.user){
+    //    login_status = "login";
+    //}else{
+    //    res.send("please login firstly");
+    //    return;
+    //}
     var query_doc = {};
     (function(){
         user.find(query_doc, function(err, doc){
             if(!err){
-                console.log(doc);
-                //res.render('admin_user', {users:doc,login_status:login_status, title: "Our Blog",user: req.session.user});
+                //console.log(doc);
+                //res.send(doc);
+                res.render('admin_user', {users:doc,login_status:login_status, title: "Our Blog",user: req.session.user});
             }else{
                 res.send("query failed!");
             }

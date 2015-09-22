@@ -10,8 +10,8 @@ var blog = require("../models/blog").blog;
 
 mongoose.connect('mongodb://localhost/hello');
 
-/* manage blog */
-router.get('/manage/blogs', function(req, res){
+/* manage personal blog */
+router.get('/manage/myblogs', function(req, res){
     var login_status = "logout";
     if(req.session.user){
         login_status = "login";
@@ -31,8 +31,9 @@ router.get('/manage/blogs', function(req, res){
         });
     })(query_doc);
 });
-/* manage user */
-router.get('/manage/users', function(req, res){
+
+/* manage blog */
+router.get('/manage/blogs', function(req, res){
     var login_status = "logout";
     if(req.session.user){
         login_status = "login";
@@ -42,9 +43,8 @@ router.get('/manage/users', function(req, res){
     }
     var query_doc = {};
     (function(){
-        user.find(query_doc, function(err, doc){
+        blog.find(query_doc, function(err, doc){
             if(!err){
-                //console.log(doc);
                 res.send(doc);
             }else{
                 res.send("query failed!");
@@ -52,6 +52,8 @@ router.get('/manage/users', function(req, res){
         });
     })(query_doc);
 });
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

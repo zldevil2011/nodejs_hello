@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var routes = require('./routes/blogs');
 var users = require('./routes/users');
+var admin = require('./routes/admins')
 var jade = require('jade');
 var express = require('express');
 var session = require('express-session');
@@ -73,6 +74,7 @@ app.use(log4js.connectLogger(this.logger('normal'), {level:'auto'}));//, format:
 
 app.use('/', routes);
 app.use('/user', users);
+app.use('/admin', admin);
 app.use('/test', routes);
 app.use('/test111',function(req, res){
    console.log("test if the console was loged");
